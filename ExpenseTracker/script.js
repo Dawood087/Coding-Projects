@@ -1,73 +1,106 @@
-const expenseForm = document.getElementById("expense-form");
-const expenseInput = document.getElementById("expense-input");
-const amountInput = document.getElementById("amount-input");
-const categoryInput = document.getElementById("category-input");
-const transactionList = document.getElementById("transaction-list");
-const totalExpense = document.getElementById("total-expense");
+// Income Felder
+const incomeDescriptionInput = document.getElementById("income-description");
+const incomeAmountInput = document.getElementById("income-amount");
+
+// Expense Felder
+const expenseDescriptionInput = document.getElementById("expense-description");
+const expenseCategoryInput = document.getElementById("expense-category");
+const expenseAmountInput = document.getElementById("expense-amount");
+
+// Summary + Tabelle
+const transactionHistory = document.getElementById("transaction-history");
 const totalIncome = document.getElementById("total-income");
+const totalExpenses = document.getElementById("total-expenses");
 const balance = document.getElementById("balance");
 
-expenseForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // sorgt dafür das die seite nicht refresht, wenn form submitted wird
+let transactions = [];
 
-  const description = expenseInput.value.trim();
-  const amount = parseFloat(amountInput.value.trim());
-  const category = categoryInput.value;
+function addIncome() {
+  const description = incomeDescriptionInput.value.trim();
+  const amount = parseFloat(incomeAmountInput.value.trim());
+
+  if (description === "" || isNaN(amount) || amount <= 0) {
+    alert("Please enter a valid income description and amount.");
+    return;
+  }
+
+  transactions.push({
+    description,
+    category: "-",
+    amount,
+    type: "Income",
+  });
+
+  updateTransactionHistory();
+  updateSummary();
+  incomeDescriptionInput.value = "";
+  incomeAmountInput.value = "";
+}
+
+function addExpense() {
+  const description = expenseDescriptionInput.value.trim();
+  const category = expenseCategoryInput.value;
+  const amount = parseFloat(expenseAmountInput.value.trim());
 
   if (description === "" || isNaN(amount) || amount <= 0) {
     alert("Please enter a valid expense description and amount.");
     return;
   }
 
-  addTransaction(description, amount, category);
+  transactions.push({
+    description,
+    category,
+    amount,
+    type: "Expense",
+  });
+  updateTransactionHistory();
   updateSummary();
-  clearInputs();
-});
+  expenseDescriptionInput.value = "";
+  expenseAmountInput.value = "";
+  expenseCategoryInput.value = "";
+}
 
-function addTransaction(description, amount, category) {
-  const transactionRow = document.createElement("tr");
+function updateTransactionHistory() {
+  transactionHistory.innerHTML = "";
 
-  transactionRow.innerHTML = `
-        <td>${description}</td>
-        <td>${category}</td>
-        <td>${amount.toFixed(2)}</td>
-        <td><button class="delete-btn">Delete</button></td>
+  transactions.forEach((transaction, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${transaction.description}</td>
+        <td>${transaction.category}</td>
+        <td>${transaction.amount.toFixed(2)}</td>
+        <td>${transaction.type}</td>
+        <td><button class="delete-btn" onclick="deleteTransaction(${index})>Delete</button></td>
     `;
+    transactionHistory.appendChild(row);
+  });
+}
 
-  transactionList.appendChild(transactionRow);
-
-  transactionRow
-    .querySelector(".delete-btn")
-    .addEventListener("click", function () {
-      transactionRow.remove();
-      updateSummary();
-    });
+function deleteTransaction(index) {
+  transactions.splice(index, 1);
+  updateTransactionHistory();
+  updateSummary();
 }
 
 function updateSummary() {
-  let totalExpenses = 0;
-  let totalIncomes = 0;
+  let incomeSum = 0;
+  let expenseSum = 0;
 
-  const transactions = transactionList.querySelectorAll("tr");
-
-  transactions.forEach(function (transaction) {
-    const amount = parseFloat(transaction.children[2].textContent);
-    const category = transaction.children[1].textContent;
-
-    if (category == "Income") {
-      totalIncomes += amount;
-    } else {
-      totalExpenses += amount;
+  transactions.forEach((transaction) => {
+    if (transaction.type === "Income") {
+      incomeSum += transaction.amount;
+    } else if (transaction.type === "Expense") {
+      expenseSum += transaction.amount;
     }
   });
 
-  totalExpense.textContent = totalExpenses.toFixed(2);
-  totalIncome.textContent = totalIncomes.toFixed(2);
-  balance.textContent = (totalIncomes - totalExpenses).toFixed(2);
+  totalIncome.textContent = incomeSum.toFixed(2);
+  totalExpenses.textContent = expenseSum.toFixed(2);
+  balance.textContent = (incomeSum - expenseSum).toFixed(2);
 }
 
-function clearInputs() {
-  expenseInput.value = "";
-  amountInput.value = "";
-  categoryInput.value = "Expense";
+function clearAll() {
+  transactions = [];
+  updateTransactionHistory();
+  updateSummary();
 }
