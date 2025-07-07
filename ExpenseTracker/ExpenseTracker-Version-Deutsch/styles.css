@@ -53,7 +53,7 @@ h2 {
 
 .button-group button,
 .clear-button-group button {
-  background-color: #ff69b4;
+  background-color: #3498db;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -64,7 +64,7 @@ h2 {
 
 .button-group button:hover,
 .clear-button-group button:hover {
-  background-color: #ff1493;
+  background-color: #217dbb;
 }
 
 .table-container {
@@ -85,7 +85,7 @@ td {
 }
 
 th {
-  background-color: #ff69b4;
+  background-color: #3498db;
   color: white;
 }
 
@@ -94,7 +94,7 @@ td {
 }
 
 td button {
-  background-color: #ff1493;
+  background-color: #217dbb;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -103,11 +103,11 @@ td button {
 }
 
 td button:hover {
-  background-color: #c71585;
+  background-color: #145a86;
 }
 
 .summary {
-  background-color: #ffb3ff;
+  background-color: #e3f2fd;
   padding: 15px;
   border-radius: 10px;
   text-align: center;

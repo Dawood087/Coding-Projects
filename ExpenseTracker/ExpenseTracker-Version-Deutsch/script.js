@@ -29,7 +29,9 @@ function addIncome() {
   const amount = parseFloat(incomeAmountInput.value.trim());
 
   if (description === "" || isNaN(amount) || amount <= 0) {
-    alert("Please enter a valid income description and amount.");
+    alert(
+      "Bitte eine gültige Einnahmenbeschreibung und einen Betrag eingeben."
+    );
     return;
   }
 
@@ -42,7 +44,7 @@ function addIncome() {
   localStorage.setItem("transactions", JSON.stringify(transactions));
   updateTransactionHistory();
   updateSummary();
-  showNotification("Income added successfully!");
+  showNotification("Einnahme erfolgreich hinzugefügt!");
   incomeDescriptionInput.value = "";
   incomeAmountInput.value = "";
 }
@@ -53,7 +55,7 @@ function addExpense() {
   const amount = parseFloat(expenseAmountInput.value.trim());
 
   if (description === "" || isNaN(amount) || amount <= 0) {
-    alert("Please enter a valid expense description and amount.");
+    alert("Bitte eine gültige Ausgabenbeschreibung und einen Betrag eingeben.");
     return;
   }
 
@@ -66,7 +68,7 @@ function addExpense() {
   localStorage.setItem("transactions", JSON.stringify(transactions));
   updateTransactionHistory();
   updateSummary();
-  showNotification("Expense added successfully!");
+  showNotification("Ausgabe erfolgreich hinzugefügt!");
   expenseDescriptionInput.value = "";
   expenseAmountInput.value = "";
   expenseCategoryInput.value = "";
@@ -81,8 +83,8 @@ function updateTransactionHistory() {
         <td>${transaction.description}</td>
         <td>${transaction.category}</td>
         <td>${transaction.amount.toFixed(2)}</td>
-        <td>${transaction.type}</td>
-        <td><button class="delete-btn" onclick="deleteTransaction(${index})><i class="fas fa-trash">Delete</button></td>
+        <td>${transaction.type === "Income" ? "Einnahme" : "Ausgabe"}</td>
+        <td><button class="delete-btn" onclick="deleteTransaction(${index})"><i class="fas fa-trash">Löschen</button></td>
     `;
     transactionHistory.appendChild(row);
   });
