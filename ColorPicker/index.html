@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker Tool</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="color-picker">
+      <input type="color" id="colorInput" value="#ff0000" />
+      <!-- #ff0000 is the default color-->
+      <div class="color-info">
+        <!--HEX and RGB Value of the selected Color-->
+        <p>HEX: <span id="hexValue">#ff0000</span></p>
+        <p>RGB: <span id="rgbValue">rgb(255, 0, 0)</span></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

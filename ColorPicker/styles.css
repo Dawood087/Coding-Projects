@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Sets the body to the Center of the Page */
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.color-picker {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.color-info {
+  margin-top: 20px;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 16px;
+}
