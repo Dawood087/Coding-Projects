@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do Liste</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: antiquewhite;
+        padding: 4%;
+      }
+
+      .todo-container {
+        margin: auto;
+        max-width: 500px;
+        padding: 30px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      #taskInput {
+        max-width: 350px;
+        width: 300px;
+        padding: 8px;
+        border-radius: 8px;
+      }
+
+      #addTaskButton {
+        color: white;
+        background-color: rgb(19, 131, 19);
+        font-weight: bold;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100px;
+      }
+
+      #taskList {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      li {
+        background-color: rgb(181, 194, 186);
+        padding: 5px;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .delete-button {
+        color: white;
+        background-color: rgb(192, 20, 11);
+        font-weight: bold;
+        border: none;
+        padding: 5px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todo-container">
+      <h1>Meine To-Do Liste</h1>
+      <input type="text" id="taskInput" placeholder="Neue Aufgabe..." />
+      <button id="addTaskButton">Hinzufügen</button>
+      <ul class="taskList"></ul>
+    </div>
+
+    <script>
+      const input = document.querySelector("#taskInput");
+      const button = document.querySelector("#addTaskButton");
+      const taskList = document.querySelector(".taskList");
+
+      button.addEventListener("click", addTask);
+
+      function addTask() {
+        const taskText = input.value.trim();
+
+        if (taskText === "") {
+          alert("Bitte gib eine Aufgabe ein!");
+          return;
+        }
+
+        const listItem = document.createElement("li");
+        listItem.innerHTML = ` <span class="task-text">${taskText}</span>
+        <button class="delete-button">Löschen</button>`;
+
+        listItem
+          .querySelector(".delete-button")
+          .addEventListener("click", () => {
+            listItem.remove();
+          });
+
+        taskList.appendChild(listItem);
+        input.value = "";
+      }
+    </script>
+  </body>
+</html>
