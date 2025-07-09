@@ -1,0 +1,155 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: rgb(206, 209, 219);
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.hero {
+  background-color: rgb(56, 2, 77);
+  color: white;
+  padding: 50px 30px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(to left, rgb(114, 22, 157), rgb(56, 2, 77));
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(to right, rgb(114, 22, 157), rgb(56, 2, 77));
+}
+
+.hero h1 {
+  font-weight: normal;
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero h2 {
+  font-weight: normal;
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+.filter-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.filter-nav a {
+  text-decoration: none;
+  padding: 9px;
+  color: rgb(56, 2, 77);
+  border: 1px solid rgb(101, 8, 138);
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.filter-nav a:hover {
+  background-color: #dbbce9;
+}
+
+.filter-nav .active {
+  background-color: #702acb;
+  color: white;
+}
+
+.filter-nav .active:hover {
+  background-color: #702acb;
+  cursor: default;
+}
+
+.animals {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.animal-card {
+  display: grid;
+  grid-template-columns: 100%; /* Erster Bestandteil nimmt 200px, der Rest wird von dem Restlichen benutzt */
+  background-color: white;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  overflow: hidden; /* Verhindert dass das Bild über das Div hinausragt */
+}
+
+.animal-card-photo {
+  order: 1;
+  grid-row: 1; /* sorgen dafür, dass das Foto im Div links angeordnet wird */
+  overflow: hidden;
+}
+
+.animal-card-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* sorgt dafür das das Div vollständig von oben bis unten vertikal gefüllt ist, auch wenn man neuen Text hinzufügt */
+  transition: transform 0.3s ease-in-out;
+}
+
+.animal-card:hover img {
+  transform: rotate(20deg) scale(1.4); /* In kombination mit Overflow: Hidden, wird das Bild beim zoomen nicht den Text überlappen */
+}
+
+.animal-card-text {
+  padding: 20px 25px;
+}
+
+.animal-card-text h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 1.8rem;
+}
+
+.animal-card-text small {
+  color: rgb(176, 176, 176);
+}
+
+.animal-card-text p {
+  margin: 0.8rem 0;
+  padding: 0;
+  line-height: 1.5; /* Zeilenabstände */
+}
+
+.primary-btn {
+  background: linear-gradient(#d147d1, #702acb);
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.primary-btn:hover {
+  background: linear-gradient(#e35ea7, #d82eb9);
+}
+
+@media screen and (min-width: 768px) {
+  .animal-card {
+    grid-template-columns: 200px 1fr;
+  }
+  .hero h1 {
+    font-size: 6rem;
+  }
+}
