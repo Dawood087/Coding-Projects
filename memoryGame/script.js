@@ -73,11 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
       !card.classList.contains("flipped") &&
       !card.classList.contains("matched")
     ) {
-      card.classList.add("flipped");
+      card.classList.add(
+        "flipped"
+      ); /* Fügt Flipped Klasse hinzu, welche im CSS die flip-Animation macht */
       flippedCards.push(card);
 
       if (flippedCards.length === 2) {
-        setTimeout(checkMatch, 800);
+        setTimeout(checkMatch, 800); // Kurze Pause, damit der Spieler die zweite Karte sehen kann
       }
     }
   }
@@ -88,23 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const value2 = card2.dataset.value;
 
     if (value1 === value2) {
+      // Karten stimmen überein
       card1.classList.add("matched");
       card2.classList.add("matched");
       matchedCards += 2;
 
+      // Alle Karten gefunden
       if (matchedCards === cardValues.length) {
         setTimeout(() => {
           alert("Glückwunsch! Du hast alle Paare gefunden!");
         }, 500);
       }
     } else {
+      // Karten stimmen nicht überein -> drehe sie nach kurzer Zeit wieder zurück
       card1.classList.remove("flipped");
       card2.classList.remove("flipped");
     }
-
+    // Liste der umgedrehten Karten für nächste Runde leeren
     flippedCards = [];
   }
   resetButton.addEventListener("click", initializeGame);
 
+  // Spiel beim Laden der seite starten
   initializeGame();
 });
